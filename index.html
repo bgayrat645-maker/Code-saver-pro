@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Saver Ultra Pro</title>
+    <!-- Prism.js Sintaksis Bo'yash CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" id="prism-theme">
+    
+    <style>
+        :root {
+            --bg-main: #000000;
+            --card-bg: rgba(28, 28, 30, 0.85);
+            --border: rgba(255, 255, 255, 0.15);
+            --accent: #0a84ff;
+            --text-main: #ffffff;
+            --text-sub: #8e8e93;
+            --code-bg: #0d0d0d;
+            --danger: #ff453a;
+            --gold: #ffd60a;
+            --blur-glass: blur(20px) saturate(180%);
+            --code-font-size: 13px;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; 
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 12px 16px 24px 16px;
+            max-width: 540px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        /* DYNAMIC ISLAND HEADER */
+        .dynamic-island-container { 
+            display: block;
+            margin-bottom: 20px; 
+            position: sticky; 
+            top: 10px; 
+            z-index: 999; 
+        }
+
+        .dynamic-island { 
+            background: #000000; 
+            border: 1px solid var(--border); 
+            border-radius: 30px; 
+            padding: 8px 18px; 
+            display: block; 
+            width: 100%; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+            backdrop-filter: var(--blur-glass); 
+            -webkit-backdrop-filter: var(--blur-glass);
+        }
+
+        .island-brand {
+            float: left;
+            line-height: 32px;
+        }
+
+        .island-brand h1 { 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: var(--text-main);
+        }
+
+        .btn-add-ios { 
+            float: right;
+            background: var(--accent); 
+            color: #ffffff; 
+            border: none; 
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            font-size: 13px; 
+        }
+
+        .btn-add-ios:active { 
+            transform: scale(0.94); 
+        }
+
+        .dynamic-island::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* STATISTIKA BLOQLARI */
+        .stats-bar { 
+            display: block; 
+            width: 100%;
+            margin-bottom: 16px; 
+        }
+
+        .stat-card { 
+            width: 31%;
+            float: left;
+            margin-right: 3.5%;
+            background: var(--card-bg); 
+            backdrop-filter: var(--blur-glass); 
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border); 
+            padding: 12px 8px; 
+            border-radius: 18px; 
+            text-align: center; 
+        }
+
+        .stat-card:last-child {
+            margin-right: 0;
+        }
+
+        .stat-card .num { 
+            font-size: 18px; 
+            font-weight: 700; 
+            color: var(--text-main);
+        }
+
+        .stat-card .label { 
+            font-size: 10px; 
+            color: var(--text-sub); 
+            text-transform: uppercase; 
+            font-weight: 600; 
+            margin-top: 2px; 
+        }
+
+        .stats-bar::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* NAVIGATSIYA TUGMALARI */
+        .navigation-menu-bar { 
+            display: block; 
+            width: 100%;
+            margin-bottom: 14px; 
+        }
+
+        .nav-btn { 
+            width: 48.5%; 
+            float: left;
+            margin-right: 3%;
+            background: var(--card-bg); 
+            backdrop-filter: var(--blur-glass); 
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border); 
+            color: var(--text-main); 
+            padding: 10px; 
+            border-radius: 16px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            text-align: center;
+        }
+
+        .nav-btn:last-child {
+            margin-right: 0;
+        }
+
+        .navigation-menu-bar::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* QIDIRUV VA FILTR */
+        .search-filter-row { 
+            display: block; 
+            width: 100%;
+            margin-bottom: 16px; 
+        }
+
+        .search-box { 
+            width: 65%; 
+            float: left;
+            margin-right: 3.5%;
+            padding: 12px 16px; 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 16px; 
+            color: var(--text-main); 
+            font-size: 14px; 
+            outline: none; 
+        }
+
+        .filter-select { 
+            width: 31.5%;
+            float: left;
+            height: 44px;
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            color: var(--accent); 
+            padding: 0 8px; 
+            border-radius: 16px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            outline: none; 
+            cursor: pointer; 
+        }
+
+        .search-filter-row::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* SNIPPET KARTALARI */
+        .snippet-card { 
+            background: var(--card-bg); 
+            backdrop-filter: var(--blur-glass); 
+            -webkit-backdrop-filter: var(--blur-glass);
+            border: 1px solid var(--border); 
+            border-radius: 20px; 
+            margin-bottom: 12px; 
+            overflow: hidden; 
+        }
+
+        .card-header { 
+            display: block; 
+            padding: 14px 16px; 
+            cursor: pointer; 
+        }
+
+        .card-title-group { 
+            float: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title { 
+            font-size: 15px; 
+            font-weight: 600; 
+            color: var(--text-main);
+        }
+
+        .card-lang { 
+            font-size: 10px; 
+            background: rgba(10, 132, 255, 0.15); 
+            color: var(--accent); 
+            padding: 3px 8px; 
+            border-radius: 12px; 
+            text-transform: uppercase; 
+            font-weight: 700; 
+        }
+
+        .card-header > span:last-child {
+            float: right;
+            color: var(--text-sub);
+            font-size: 12px;
+        }
+
+        .card-header::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .card-body { 
+            display: none; 
+            border-top: 1px solid var(--border); 
+            background: var(--code-bg); 
+        }
+
+        .snippet-card.open .card-body { 
+            display: block; 
+        }
+
+        /* KOD YUQORI PANELI VA TUGMALARI */
+        .code-top-bar { 
+            padding: 10px 14px; 
+            background: rgba(255, 255, 255, 0.03); 
+            border-bottom: 1px solid var(--border); 
+        }
+
+        .code-top-bar > span {
+            float: left;
+            line-height: 28px;
+        }
+
+        .top-actions { 
+            float: right;
+            display: flex; 
+            gap: 4px; 
+        }
+
+        .code-top-bar::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .btn-icon { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            color: var(--text-main); 
+            padding: 5px 8px; 
+            border-radius: 10px; 
+            font-size: 11px; 
+            cursor: pointer; 
+            display: inline-block;
+        }
+
+        .btn-icon.btn-delete { 
+            color: var(--danger); 
+        }
+
+        .code-container { 
+            position: relative; 
+            overflow-x: auto; 
+            width: 100%;
+        }
+
+        pre[class*="language-"] { 
+            margin: 0 !important; 
+            padding: 14px !important; 
+            font-size: var(--code-font-size) !important; 
+            background: transparent !important; 
+        }
+
+        .code-watermark { 
+            padding: 6px 14px; 
+            background: rgba(0,0,0,0.3); 
+            font-size: 10px; 
+            color: var(--text-sub); 
+            text-align: right; 
+            border-top: 1px dashed var(--border); 
+        }
+
+        /* SOZLAMALAR SAFHASI */
+        .fullscreen-page { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: var(--bg-main); 
+            z-index: 1000; 
+            padding: 20px 16px; 
+            overflow-y: auto; 
+        }
+
+        .fullscreen-page.active { 
+            display: block; 
+        }
+
+        .page-header { 
+            display: block;
+            padding-bottom: 16px; 
+            border-bottom: 1px solid var(--border); 
+            margin-bottom: 20px; 
+        }
+
+        .page-header h2 {
+            float: left;
+            font-size: 18px;
+        }
+
+        .page-header .btn-add-ios {
+            float: right;
+        }
+
+        .page-header::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .settings-card-item { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            padding: 14px; 
+            border-radius: 18px; 
+            margin-bottom: 12px; 
+            display: block;
+        }
+
+        .settings-card-item > div:first-child {
+            float: left;
+            width: 65%;
+        }
+
+        .settings-card-item > select,
+        .settings-card-item > button,
+        .settings-card-item > div:last-child {
+            float: right;
+        }
+
+        .settings-card-item::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* MODAL OYNASI */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0,0,0,0.7); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1001; 
+        }
+
+        .modal.active { 
+            display: block; 
+        }
+
+        .modal-content { 
+            background: #1c1c1e; 
+            border: 1px solid var(--border); 
+            border-radius: 24px; 
+            width: 90%; 
+            max-width: 440px; 
+            padding: 20px; 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .form-group { 
+            margin-bottom: 14px; 
+        }
+
+        .form-group label { 
+            display: block; 
+            font-size: 12px; 
+            margin-bottom: 6px; 
+            color: var(--text-sub); 
+        }
+
+        .form-control { 
+            width: 100%; 
+            padding: 10px 14px; 
+            background: rgba(0,0,0,0.4); 
+            border: 1px solid var(--border); 
+            border-radius: 14px; 
+            color: var(--text-main); 
+            font-size: 13px; 
+            outline: none; 
+        }
+
+        textarea.form-control { 
+            resize: vertical; 
+            min-height: 120px; 
+            font-family: monospace; 
+        }
+
+        .modal-actions {
+            display: block;
+            margin-top: 16px;
+        }
+
+        .modal-actions #btnCancel {
+            float: left;
+        }
+
+        .modal-actions #btnSave {
+            float: right;
+        }
+
+        .modal-actions::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* TOAST BILDIRISHNOMA */
+        #toast { 
+            visibility: hidden; 
+            min-width: 200px; 
+            background-color: var(--accent); 
+            color: #ffffff; 
+            text-align: center; 
+            border-radius: 20px; 
+            padding: 10px 16px; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 50%; 
+            bottom: 30px; 
+            transform: translateX(-50%); 
+            font-size: 13px; 
+            font-weight: 600; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        #toast.show { 
+            visibility: visible; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DYNAMIC ISLAND HEADER -->
+    <div class="dynamic-island-container">
+        <div class="dynamic-island">
+            <div class="island-brand">
+                <h1>Code Saver Pro</h1>
+            </div>
+            <button class="btn-add-ios" id="btnOpenModal">+ Yangi</button>
+        </div>
+    </div>
+
+    <!-- STATISTIKA BLOQLARI -->
+    <div class="stats-bar">
+        <div class="stat-card">
+            <div class="num" id="totalCount">0</div>
+            <div class="label" id="lblTotal">Jami Kodlar</div>
+        </div>
+        <div class="stat-card">
+            <div class="num" id="favCount">0</div>
+            <div class="label" id="lblFav">Sevimli</div>
+        </div>
+        <div class="stat-card">
+            <div class="num" id="topLang">-</div>
+            <div class="label" id="lblTopLang">Asosiy Til</div>
+        </div>
+    </div>
+
+    <!-- NAVIGATSIYA TUGMALARI -->
+    <div class="navigation-menu-bar">
+        <button class="nav-btn" id="btnOpenSettings">⚙️ Sozlamalar</button>
+        <button class="nav-btn" id="btnFilterFav">⭐ Sevimlilar</button>
+    </div>
+
+    <!-- QIDIRUV VA FILTR -->
+    <div class="search-filter-row">
+        <input type="text" class="search-box" id="searchInput" placeholder="Izlash...">
+        <select class="filter-select" id="langFilter">
+            <option value="all">📁 Barchasi</option>
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="sql">SQL</option>
+            <option value="php">PHP</option>
+            <option value="cpp">C++</option>
+        </select>
+    </div>
+
+    <!-- KODLAR RO'YXATI -->
+    <main id="snippetList"></main>
+
+    <!-- SOZLAMALAR SAFHASI (FULLSCREEN) -->
+    <div class="fullscreen-page" id="settingsPage">
+        <div class="page-header">
+            <h2>⚙️ Sozlamalar</h2>
+            <button class="btn-add-ios" id="btnCloseSettings">Yopish</button>
+        </div>
+
+        <div class="settings-card-item">
+            <div>
+                <strong>🌐 Ilova Tili</strong>
+                <p style="font-size: 11px; color: var(--text-sub);">Interfeys tilini tanlang</p>
+            </div>
+            <select class="filter-select" id="settingLang" style="width: auto;">
+                <option value="uz">O'zbekcha</option>
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
+
+        <div class="settings-card-item">
+            <div>
+                <strong>🎨 Sintaksis Mavzusi</strong>
+                <p style="font-size: 11px; color: var(--text-sub);">Kodlar rangining uslubi</p>
+            </div>
+            <select class="filter-select" id="settingTheme" style="width: auto;">
+                <option value="tomorrow">Tomorrow Night</option>
+                <option value="okaidia">Okaidia (Dark)</option>
+                <option value="default">Default Light</option>
+                <option value="coy">Coy</option>
+            </select>
+        </div>
+
+        <div class="settings-card-item">
+            <div>
+                <strong>🔢 Qator Raqamlari</strong>
+                <p style="font-size: 11px; color: var(--text-sub);">Kod yonida raqamlarni ko'rsatish</p>
+            </div>
+            <button class="btn-icon" id="btnToggleLineNumbers">❌ O'chirilgan</button>
+        </div>
+
+        <div class="settings-card-item">
+            <div>
+                <strong>🏷️ Suv Belgisi Matni</strong>
+                <p style="font-size: 11px; color: var(--text-sub);">Kod pastidagi mualliflik matni</p>
+            </div>
+            <button class="btn-icon" id="btnEditWatermark">✏️</button>
+        </div>
+
+        <div class="settings-card-item">
+            <div>
+                <strong>💾 LocalStorage Xotirasi</strong>
+                <p style="font-size: 11px; color: var(--text-sub);" id="storageUsage">Ishlatildi: 0 KB / 10240 KB</p>
+            </div>
+            <button class="btn-icon btn-delete" id="btnClearStorage">🧹 Keshni Tozalash</button>
+        </div>
+    </div>
+
+    <!-- MODAL OYNASI (YANGI KOD QO'SHISH / TAHRIRLASH) -->
+    <div class="modal" id="codeModal">
+        <div class="modal-content">
+            <h3 id="modalTitle" style="margin-bottom: 14px; text-align: center;">Yangi kod saqlash</h3>
+            
+            <div class="form-group">
+                <label>Sarlavha</label>
+                <input type="text" class="form-control" id="inputTitle" placeholder="Masalan: Array Filter">
+            </div>
+
+            <div class="form-group">
+                <label>Dasturlash tili</label>
+                <select class="form-control" id="inputLang">
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="sql">SQL</option>
+                    <option value="php">PHP</option>
+                    <option value="cpp">C++</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Kod</label>
+                <textarea class="form-control" id="inputCode" placeholder="Kodni kiriting..."></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-icon" id="btnCancel">Bekor qilish</button>
+                <button class="btn-add-ios" id="btnSave">Saqlash</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST BILDIRISHNOMA -->
+    <div id="toast">Xabar!</div>
+
+    <!-- Prism JS Kutubxonasi -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <!-- Asosiy JavaScript Mantiq -->
+    <script>
+        // ILOVA HOLATI (STATE)
+        let snippets = JSON.parse(localStorage.getItem('cs_snippets')) || [];
+        let settings = JSON.parse(localStorage.getItem('cs_settings')) || {
+            lang: 'uz',
+            theme: 'tomorrow',
+            lineNumbers: false,
+            watermark: 'Code Saver Ultra Pro'
+        };
+
+        let editingId = null;
+        let onlyFavorites = false;
+
+                // DOM ELEMENTLARINI OLISH
+        const snippetList = document.getElementById('snippetList');
+        const codeModal = document.getElementById('codeModal');
+        const settingsPage = document.getElementById('settingsPage');
+        const searchInput = document.getElementById('searchInput');
+        const langFilter = document.getElementById('langFilter');
+
+        const inputTitle = document.getElementById('inputTitle');
+        const inputLang = document.getElementById('inputLang');
+        const inputCode = document.getElementById('inputCode');
+
+                    saveData();
+            renderSnippets();
+            updateStats();
+        }
+
+        function deleteSnippet(id) {
+            if (confirm("Ushbu kodni o'chirishni tasdiqlaysizmi?")) {
+                snippets = snippets.filter(s => s.id !== id);
+                saveData();
+                renderSnippets();
+                updateStats();
+                calculateStorage();
+                showToast(i18n[settings.lang].deleted);
+            }
+        }
+
+        function editSnippet(id) {
+            const item = snippets.find(s => s.id === id);
+            if (item) {
+                editingId = id;
+                inputTitle.value = item.title;
+                inputLang.value = item.lang;
+                inputCode.value = item.code;
+                document.getElementById('modalTitle').innerText = "Kodni tahrirlash";
+                codeModal.classList.add('active');
+            }
+        }
+
+        // MODAL BILAN ISHLASH
+        document.getElementById('btnOpenModal').onclick = () => {
+            editingId = null;
+            inputTitle.value = '';
+            inputCode.value = '';
+            document.getElementById('modalTitle').innerText = "Yangi kod saqlash";
+            codeModal.classList.add('active');
+        };
+
+        document.getElementById('btnCancel').onclick = () => {
+            codeModal.classList.remove('active');
+        };
+
+        document.getElementById('btnSave').onclick = () => {
+            const title = inputTitle.value.trim();
+            const lang = inputLang.value;
+            const code = inputCode.value.trim();
+
+            if (!title || !code) {
+                alert("Iltimos, sarlavha va kodni kiriting!");
+                return;
+            }
+
+            if (editingId) {
+                snippets = snippets.map(s => s.id === editingId ? { ...s, title, lang, code } : s);
+            } else {
+                snippets.unshift({
+                    id: Date.now().toString(),
+                    title,
+                    lang,
+                    code,
+                    isFav: false
+                });
+            }
+
+            saveData();
+            renderSnippets();
+            updateStats();
+            calculateStorage();
+            codeModal.classList.remove('active');
+            showToast(i18n[settings.lang].saved);
+        };
+
+        // SOZLAMALAR SAFHASI VA SOZLAMALARNI SAQLASH
+        document.getElementById('btnOpenSettings').onclick = () => settingsPage.classList.add('active');
+        document.getElementById('btnCloseSettings').onclick = () => settingsPage.classList.remove('active');
+
+        document.getElementById('settingLang').onchange = (e) => {
+            settings.lang = e.target.value;
+            saveSettings();
+            applySettings();
+        };
+
+        document.getElementById('settingTheme').onchange = (e) => {
+            settings.theme = e.target.value;
+            saveSettings();
+            applySettings();
+        };
+
+        document.getElementById('btnToggleLineNumbers').onclick = () => {
+            settings.lineNumbers = !settings.lineNumbers;
+            saveSettings();
+            applySettings();
+            renderSnippets();
+        };
+
+        document.getElementById('btnEditWatermark').onclick = () => {
+            const res = prompt("Yangi suv belgisi matnini kiriting:", settings.watermark);
+            if (res !== null) {
+                settings.watermark = res;
+                saveSettings();
+                renderSnippets();
+            }
+        };
+
+        document.getElementById('btnClearStorage').onclick = () => {
+            if (confirm("Barcha ma'lumotlar o'chib ketadi! Rozimisiz?")) {
+                localStorage.clear();
+                snippets = [];
+                saveData();
+                renderSnippets();
+                updateStats();
+                calculateStorage();
+            }
+        };
+
+        // FILTRLASH VA QIDIRUV HODISALARI
+        searchInput.oninput = renderSnippets;
+        langFilter.onchange = renderSnippets;
+
+        document.getElementById('btnFilterFav').onclick = () => {
+            onlyFavorites = !onlyFavorites;
+            document.getElementById('btnFilterFav').style.borderColor = onlyFavorites ? 'var(--gold)' : 'var(--border)';
+            renderSnippets();
+        };
+
+        // YORDAMCHI FUNKSIYALAR
+        function saveData() {
+            localStorage.setItem('cs_snippets', JSON.stringify(snippets));
+        }
+
+        function saveSettings() {
+            localStorage.setItem('cs_settings', JSON.stringify(settings));
+        }
+
+        function applySettings() {
+            document.getElementById('settingLang').value = settings.lang;
+            document.getElementById('settingTheme').value = settings.theme;
+            
+            const btnLN = document.getElementById('btnToggleLineNumbers');
+            btnLN.innerText = settings.lineNumbers ? '✅ Yoqilgan' : '❌ O\'chirilgan';
+
+            // Prism Mavzusini Yangilash
+            const themeLink = document.getElementById('prism-theme');
+            let themeUrl = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css';
+            if (settings.theme === 'okaidia') themeUrl = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css';
+            if (settings.theme === 'default') themeUrl = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css';
+            if (settings.theme === 'coy') themeUrl = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-coy.min.css';
+            themeLink.href = themeUrl;
+
+            // Matnlarni tarjima qilish
+            const t = i18n[settings.lang];
+            document.getElementById('lblTotal').innerText = t.total;
+            document.getElementById('lblFav').innerText = t.fav;
+            document.getElementById('lblTopLang').innerText = t.topLang;
+            searchInput.placeholder = t.search;
+        }
+
+        function calculateStorage() {
+            const bytes = new Blob([JSON.stringify(localStorage)]).size;
+            const kb = (bytes / 1024).toFixed(2);
+            document.getElementById('storageUsage').innerText = `Ishlatildi: ${kb} KB / 10240 KB`;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+    </script>
+</body>
+</html>
